@@ -1,0 +1,47 @@
+/*Sort the Array arr[] in ascending order. This step takes (O(nlogn)).
+Iterate through the array. Compare the value of index i to the number of elements after index i. If arr[i] equals the number of elements after arr[i], it is a noble Integer. Condition to check: (A[i] == length-i-1). This step takes O(n).
+Note: Array may have duplicate elements. So, we should skip the elements (adjacent elements in the sorted array) that are same.*/
+
+// Java program to find Noble elements
+// in an array.
+import java.util.Arrays;
+ 
+public class Main
+{
+    // Returns a Noble integer if present,
+    // else returns -1.
+    public static int nobleInteger(int arr[])
+    {
+        Arrays.sort(arr);
+ 
+        // Return a Noble element if present
+        // before last.
+        int n = arr.length;
+        for (int i=0; i<n-1; i++)
+        {
+            if (arr[i] == arr[i+1])
+                continue;
+ 
+            // In case of duplicates, we
+            // reach last occurrence here.
+            if (arr[i] == n-i-1)
+                return arr[i];
+        }
+ 
+        if (arr[n-1] == 0)
+            return arr[n-1];
+ 
+        return -1;
+    }
+ 
+    // Driver code
+    public static void main(String args[])
+    {
+        int [] arr = {10, 3, 20, 40, 2};
+        int res = nobleInteger(arr);
+        if (res != -1)
+            System.out.println("The noble integer is "+ res);
+        else
+            System.out.println("No Noble Integer Found");
+    }
+}
